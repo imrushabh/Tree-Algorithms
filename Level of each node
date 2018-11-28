@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int adj[101][101];
+int visited[100]={0},levels[100];
+int n,lvl=1;
+
+void bfs(int src)
+{
+  visited[src]=1;
+  levels[src]=lvl;
+  queue<int> que;
+  que.push(src);
+  while(!que.empty())
+  {
+    int element=que.front();
+    que.pop();
+    cout<<element<<" "<<"level= "<<levels[element]<<endl;
+    lvl++;
+    visited[element]=1;
+    for(int i=1;i<=n;i++)
+    {
+      if(adj[element][i] && !visited[i]){
+        que.push(i);
+        levels[i]=lvl;
+      }
+
+    }
+
+  }
+}
+
+int main()
+{
+  for(int i=1;i<=100;i++)
+    for(int j=0;j<=n;j++)
+      adj[i][j]=0;
+
+  
+  cout<<"enter the number of nodes"<<endl;
+  cin>>n;
+
+  cout<<"enter the edges present (u,v) and -1 -1 to exit"<<endl;
+  while(1)
+  {
+    int u,v;
+    if(u!=-1 && v!=-1)
+    {
+      cin>>u>>v;
+      adj[u][v]=1;
+      adj[v][u]=1;
+    }
+    if(u==-1 && v==-1)
+      break;
+
+  }
+  cout<<"enter source vertex of tree"<<endl;
+  int src;
+  cin>>src;
+  cout<<"bfs is:\n";
+  bfs(src); 
+}
