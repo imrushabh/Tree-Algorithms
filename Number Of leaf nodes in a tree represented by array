@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using  namespace std;
+
+
+int visited[100]={0};
+int ans=0,n;
+
+queue<int> que;
+
+
+int FindLeafNodes(int src,int *a)
+{
+  que.push(src);
+  while(!que.empty())
+  {
+     
+    int ele=que.front();
+    cout<<ele<<endl;
+    que.pop();
+    if(a[2*ele]==-1 && a[2*ele+1]==-1)
+    {
+      ans++;
+      //cout<<ele<<endl;
+    }
+    else
+    {
+      if(a[2*ele]!=-1)
+        que.push(2*ele);
+      if(a[2*ele+1]!=-1)
+        que.push(2*ele+1);
+      
+    }
+  } 
+  
+  return ans;  
+
+}
+
+int main()
+{
+  
+  int b[]={1,2,3,4,5,6,-1,-1,-1,-1,-1,-1,-1};
+  
+
+  cout<<FindLeafNodes(1,b);
+  
+}
